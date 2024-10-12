@@ -9,13 +9,13 @@ function scr_player_jump() {
 	    movespeed -= 0.05;
 	if (movespeed == 0)
 	    momemtum = 0;
-	if (((move == 0) && (momemtum == 0)) || place_meeting((x + hsp), y, obj_wall))
+	if (((move == 0) && (momemtum == 0)) || place_meeting((x + hsp), y, obj_solid))
 	    movespeed = 0;
 	if ((move != 0) && (movespeed < 6))
 	    movespeed += 0.25;
 	if (movespeed > 6)
 	    movespeed -= 0.05;
-	if (((place_meeting(x, (y + 1), obj_collisionparent) && (move == 1)) || (place_meeting(x, (y + 1), obj_collisionparent) && (move == -1))) && (!place_meeting((x + sign(hsp)), y, obj_slopes)))
+	if (((place_meeting(x, (y + 1), obj_collisionparent) && (move == 1)) || (place_meeting(x, (y + 1), obj_collisionparent) && (move == -1))) && (!place_meeting((x + sign(hsp)), y, obj_slope)))
 	    movespeed = 0;
 	if (dir != xscale)
 	{
@@ -136,12 +136,6 @@ function scr_player_jump() {
 	{
 	    if ((sprite_index == spr_player_stompprep) && (floor(image_index) == 4))
 	        sprite_index = spr_player_stomp;
-	}
-	if (key_attack && ((sprite_index != spr_player_airdash2) && ((sprite_index != spr_player_airdash1) && (fallinganimation < 40))))
-	{
-	    stompAnim = 0;
-	    sprite_index = spr_player_airdash1;
-	    image_index = 0;
 	}
 	if (key_slap2 && ((shotgunAnim == 1) && (global.ammo > 0)))
 	{

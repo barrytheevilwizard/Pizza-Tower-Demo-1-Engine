@@ -23,7 +23,7 @@ function scr_player_slap(){
 	        movespeed += 0.25;
 	    if (movespeed > 6)
 	        movespeed -= 0.05;
-	    if (((place_meeting(x, (y + 1), obj_collisionparent) && (move == 1)) || (place_meeting((x - 1), y, obj_collisionparent) && (move == -1))) && (!place_meeting((x + sign(hsp)), y, obj_slopes)))
+	    if (((place_meeting(x, (y + 1), obj_collisionparent) && (move == 1)) || (place_meeting((x - 1), y, obj_collisionparent) && (move == -1))) && (!place_meeting((x + sign(hsp)), y, obj_slope)))
 	        movespeed = 0;
 	    if (dir != xscale)
 	    {

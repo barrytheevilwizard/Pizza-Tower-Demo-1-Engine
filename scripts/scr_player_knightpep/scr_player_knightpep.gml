@@ -95,7 +95,7 @@ function scr_player_knightpep(){
 	    instance_create(x, (y - 600), obj_thunder);
 	if (floor(image_index) == (image_number - 1) && sprite_index == spr_knightpep_thunder)
 	    sprite_index = spr_knightpep_idle;
-	if ((!(place_meeting((x + sign(hsp)), y, obj_collisionparent))) && (!(place_meeting((x + sign(hsp)), (y + 1), obj_collisionparent))) && place_meeting((x + sign(hsp)), (y + 2), obj_collisionparent) && place_meeting(x, (y + 1), obj_slopes))
+	if ((!(place_meeting((x + sign(hsp)), y, obj_collisionparent))) && (!(place_meeting((x + sign(hsp)), (y + 1), obj_collisionparent))) && place_meeting((x + sign(hsp)), (y + 2), obj_collisionparent) && place_meeting(x, (y + 1), obj_slope))
 	{
 	    sprite_index = spr_knightpep_downslope;
 	    state = 4;

@@ -10,8 +10,8 @@
   "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
-  "edgeFiltering": false,
-  "For3D": false,
+  "edgeFiltering": true,
+  "For3D": true,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"410fe7fb-d662-4066-9e06-100081fcb7ec",},
   ],
@@ -34,7 +34,7 @@
       4294902015,
     ],
     "highlightColour": 1728023040,
-    "highlightStyle": 0,
+    "highlightStyle": 1,
     "left": 0,
     "right": 0,
     "tileMode": [
@@ -51,7 +51,7 @@
     "name": "collision",
     "path": "folders/Sprites/level structure/collision.yy",
   },
-  "preMultiplyAlpha": false,
+  "preMultiplyAlpha": true,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",

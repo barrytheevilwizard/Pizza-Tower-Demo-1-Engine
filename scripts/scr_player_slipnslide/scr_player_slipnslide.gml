@@ -10,7 +10,7 @@ function scr_player_slipnslide(){
 	crouchAnim = 0;
 	machhitAnim = 0;
 	hsp = (xscale * movespeed);
-	if (!place_meeting(x, (y + 1), obj_slopes))
+	if (!place_meeting(x, (y + 1), obj_slope))
 	{
 	    if (movespeed >= 0)
 	        movespeed -= 0.2;
@@ -19,7 +19,7 @@ function scr_player_slipnslide(){
 	    movespeed += 0.2;
 	machhitAnim = 0;
 	crouchslideAnim = 1;
-	if ((movespeed == 0) && (!place_meeting(x, (y + 1), obj_slopes)))
+	if ((movespeed == 0) && (!place_meeting(x, (y + 1), obj_slope)))
 	{
 	    state = 0;
 	    movespeed = 0;

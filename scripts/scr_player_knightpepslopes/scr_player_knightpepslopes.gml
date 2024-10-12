@@ -3,7 +3,7 @@ function scr_player_knightpepslopes(){
 	hsp = (xscale * movespeed);
 	if (sprite_index == spr_knightpep_downslope)
 	    movespeed += 0.5;
-	if (!(place_meeting(x, (y + 1), obj_slopes)))
+	if (!(place_meeting(x, (y + 1), obj_slope)))
 	    sprite_index = spr_knightpep_charge;
 	if ((!(place_meeting((x + sign(hsp)), y, obj_collisionparent))) && (!(place_meeting((x + sign(hsp)), (y + 1), obj_collisionparent))) && place_meeting((x + sign(hsp)), (y + 2), obj_collisionparent))
 	    sprite_index = spr_knightpep_downslope;

@@ -46,13 +46,13 @@ function scr_player_bombpep(){
 	}
 	if (bombpeptimer > 0)
 	    bombpeptimer -= 0.5;
-	if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && hsp != 0 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && hsp != 0 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	{
 	    instance_create((x + 10), (y + 10), obj_bumpeffect);
 	    vsp -= 3;
 	    xscale *= -1;
 	}
-	if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && hsp != 0 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && hsp != 0 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	{
 	    instance_create((x - 10), (y + 10), obj_bumpeffect);
 	    vsp -= 3;

@@ -237,13 +237,20 @@ with (obj_player) {
     }
     else
         audio_stop_sound(sound_dash1);
-    if ((state == 76 || state == 56) && place_meeting(x, (y + 1), obj_collisionparent))
+    if state == 56 && place_meeting(x, (y + 1), obj_collisionparent)
     {
         if (!audio_is_playing(sound_dash2))
             scr_sound(sound_dash2);
     }
     else
         audio_stop_sound(sound_dash2);
+	if state == 76 && place_meeting(x, (y + 1), obj_collisionparent)
+	{
+        if (!audio_is_playing(sound_dash3))
+            scr_sound(sound_dash3);
+    }
+    else
+        audio_stop_sound(sound_dash3);
     if ((sprite_index == spr_player_idlevomit) && ((image_index > 28) && (image_index < 43)))
         instance_create((x + random_range(-5, 5)), (y + 46), obj_vomit);
     if ((sprite_index == spr_player_idlevomitblood) && ((image_index > 28) && (image_index < 43)))

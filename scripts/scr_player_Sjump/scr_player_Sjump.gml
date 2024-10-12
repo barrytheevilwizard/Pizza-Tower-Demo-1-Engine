@@ -19,7 +19,7 @@ function scr_player_Sjump(){
 	    hsp = (xscale * a);
 	    vsp = 0;
 	}
-	if (place_meeting(x, (y - 1), obj_collisionparent) && ((!place_meeting(x, (y - 1), obj_destructibles)) && ((!place_meeting((x + sign(hsp)), y, obj_slopes)) && (!place_meeting((x - sign(hsp)), y, obj_slopes)))))
+	if (place_meeting(x, (y - 1), obj_collisionparent) && ((!place_meeting(x, (y - 1), obj_destructibles)) && ((!place_meeting((x + sign(hsp)), y, obj_slope)) && (!place_meeting((x - sign(hsp)), y, obj_slope)))))
 	{
 	    scr_sound(sound_enemystomp);
 	    a = 0;

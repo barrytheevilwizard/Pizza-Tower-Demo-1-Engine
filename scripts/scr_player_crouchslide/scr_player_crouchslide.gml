@@ -9,7 +9,7 @@ function scr_player_crouchslide() {
 	    machhitAnim = 1;
 	    state = 56;
 	}
-	if ((((hsp == 0) || ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) || (place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)))) && (!place_meeting((x + sign(hsp)), y, obj_slopes))) || (movespeed <= 0))
+	if ((((hsp == 0) || ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) || (place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)))) && (!place_meeting((x + sign(hsp)), y, obj_slope))) || (movespeed <= 0))
 	{
 	    state = 52;
 	    movespeed = 0;
@@ -20,7 +20,7 @@ function scr_player_crouchslide() {
 	    start_running = 1;
 	    alarm[4] = 14;
 	}
-	if ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) && (!place_meeting((x + sign(hsp)), y, obj_slopes)))
+	if ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) && (!place_meeting((x + sign(hsp)), y, obj_slope)))
 	{
 	    movespeed = 0;
 	    state = 58;
@@ -34,7 +34,7 @@ function scr_player_crouchslide() {
 		sprite_index = spr_player_bump;
 		
 	}
-	if ((place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)) && (!place_meeting((x + sign(hsp)), y, obj_slopes)))
+	if ((place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)) && (!place_meeting((x + sign(hsp)), y, obj_slope)))
 	{
 	    movespeed = 0;
 	    state = 58;

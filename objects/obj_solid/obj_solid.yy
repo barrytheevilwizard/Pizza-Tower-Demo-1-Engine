@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_slopes",
+  "name": "obj_solid",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
@@ -10,8 +10,8 @@
     "path": "folders/Objects/Level Structure/Collision.yy",
   },
   "parentObjectId": {
-    "name": "obj_enemiesbumpable",
-    "path": "objects/obj_enemiesbumpable/obj_enemiesbumpable.yy",
+    "name": "obj_bumpable",
+    "path": "objects/obj_bumpable/obj_bumpable.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sprite197",
-    "path": "sprites/sprite197/sprite197.yy",
+    "name": "spr_wall",
+    "path": "sprites/spr_wall/spr_wall.yy",
   },
   "spriteMaskId": null,
   "visible": false,

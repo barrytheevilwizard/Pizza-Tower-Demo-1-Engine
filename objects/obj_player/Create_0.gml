@@ -9,6 +9,7 @@ with(obj_player)
     global.hp = 6;
     xscale = 1;
     yscale = 1;
+	grounded = 0;
     sprite_index = spr_player_crouchslide;
     facehurt = 1;
     movespeed = 19;

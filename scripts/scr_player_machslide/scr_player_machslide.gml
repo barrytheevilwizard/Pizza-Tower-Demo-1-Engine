@@ -17,16 +17,27 @@ if (floor(hsp) == 0)
     state = 0
     movespeed = 4
 }
-if ((floor(hsp) == 0) && (((sprite_index == spr_player_machslideboost) || (sprite_index == spr_player_machslideboost3)) && (mach2 != 0)))
+if (floor(hsp) == 0) && (sprite_index == spr_player_machslideboost3) && (mach2 != 0)
 {
     scr_sound(sound_maxspeed)
     momemtum = 1
     state = 56
     image_index = 0
     xscale *= -1
+	movespeed = 12
     instance_create(x, y, obj_jumpdust)
 }
-if ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) && (!place_meeting((x + 1), y, obj_slopes)))
+if (floor(hsp) == 0) && (sprite_index == spr_player_machslideboost) && (mach2 != 0)
+{
+    scr_sound(sound_maxspeed)
+    momemtum = 1
+    state = 56
+    image_index = 0
+    xscale *= -1
+	movespeed = 8
+    instance_create(x, y, obj_jumpdust)
+}
+if ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) && (!place_meeting((x + 1), y, obj_slope)))
 {
     movespeed = 0
     state = 58
@@ -38,7 +49,7 @@ if ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) && (!place
 	sprite_index = spr_player_bump;
 	
 }
-if ((place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)) && (!place_meeting((x - 1), y, obj_slopes)))
+if ((place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)) && (!place_meeting((x - 1), y, obj_slope)))
 {
     movespeed = 0
     state = 58

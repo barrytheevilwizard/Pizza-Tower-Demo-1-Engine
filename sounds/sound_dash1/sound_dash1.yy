@@ -10,14 +10,14 @@
   "bitRate": 192,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 6.117755,
+  "duration": 3.999637,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds/Sounds.yy",
   },
   "preload": true,
   "sampleRate": 44100,
-  "soundFile": "sound_dash1.wav",
+  "soundFile": "sound_dash1.ogg",
   "type": 0,
-  "volume": 0.6,
+  "volume": 1.0,
 }

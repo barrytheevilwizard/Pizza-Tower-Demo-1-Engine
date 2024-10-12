@@ -5,7 +5,8 @@ function scr_player_mach2() {
 	momemtum = 1;
 	move2 = (key_right2 + key_left2);
 	move = (key_right + key_left);
-	movespeed = 10;
+	if place_meeting(x, y + 1,obj_collisionparent)
+	movespeed += 0.05
 	crouchslideAnim = 1;
 	if place_meeting(x, (y + 1), obj_collisionparent)
 	{
@@ -47,20 +48,17 @@ function scr_player_mach2() {
 	}
 	if place_meeting(x, (y + 1), obj_collisionparent)
 	{
-	    if (mach2 < 100)
-	        mach2++;
-	    if (mach2 >= 100)
-	    {
-	        scr_sound(sound_maxspeed);
-	        machhitAnim = 0;
-	        state = 76;
-	        flash = 1;
-	        sprite_index = spr_player_mach4;
-	        instance_create(x, y, obj_jumpdust);
-	        instance_create(x, y, obj_mach3effect1);
-	        instance_create(x, y, obj_mach3effect2);
-	        movespeed = 8;
-	    }
+		if movespeed >= 12
+		{
+			scr_sound(sound_maxspeed);
+		    machhitAnim = 0;
+			 state = 76;
+			flash = 1;
+			sprite_index = spr_player_mach4;
+			instance_create(x, y, obj_jumpdust);
+			instance_create(x, y, obj_mach3effect1);
+			instance_create(x, y, obj_mach3effect2);
+		}
 	}
 	if key_jump
 	    input_buffer_jump = 0;
@@ -87,9 +85,16 @@ function scr_player_mach2() {
 	}
 	if (key_down && place_meeting(x, (y + 1), obj_collisionparent))
 	{
-	    sprite_index = spr_player_crouchslip;
+	    sprite_index = spr_player_mach;
 	    machhitAnim = 0;
-	    state = 54;
+	    state = 23;
+	}
+	else if (key_down && !place_meeting(x, (y + 1), obj_collisionparent))
+	{
+	    sprite_index = spr_player_mach2jump;
+	    machhitAnim = 0;
+	    state = 23;
+		vsp = 10
 	}
 	if ((!key_jump2) && ((jumpstop == 0) && ((vsp < 0.5) && (stompAnim == 0))))
 	{
@@ -105,7 +110,7 @@ function scr_player_mach2() {
 	}
 	if place_meeting(x, (y + 1), obj_collisionparent)
 	{
-	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + 1), y, obj_slopes))))
+	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + 1), y, obj_slope))))
 	    {
 	        scr_sound(sound_enemyslap);
 	        movespeed = 0;
@@ -116,7 +121,7 @@ function scr_player_mach2() {
 	        image_index = 0;
 	        instance_create((x + 10), (y + 10), obj_bumpeffect);
 	    }
-	    if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x - 1), y, obj_slopes))))
+	    if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x - 1), y, obj_slope))))
 	    {
 	        scr_sound(sound_enemyslap);
 	        movespeed = 0;
@@ -130,12 +135,12 @@ function scr_player_mach2() {
 	}
 	if (!(place_meeting(x, (y + 1), obj_collisionparent)))
 	{
-	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        machhitAnim = 0;
 	        state = 3;
 	    }
-	    else if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    else if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        machhitAnim = 0;
 	        state = 3;

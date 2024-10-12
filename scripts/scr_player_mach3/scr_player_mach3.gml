@@ -15,7 +15,7 @@ function scr_player_mach3() {
 	    sprite_index = spr_player_mach3jump;
 	    vsp = -9;
 	}
-	if (place_meeting(x, y, obj_wall) || ((sprite_index == spr_player_mach3jump) && (floor(image_index) == (image_number - 1))))
+	if (place_meeting(x, y, obj_solid) || ((sprite_index == spr_player_mach3jump) && (floor(image_index) == (image_number - 1))))
 	    sprite_index = spr_player_mach4;
 	if ((!key_jump2) && ((jumpstop == 0) && ((vsp < 0.5) && (stompAnim == 0))))
 	{
@@ -64,9 +64,16 @@ function scr_player_mach3() {
 	    flash = 0;
 	    state = 23;
 	}
+	else if (key_down && !place_meeting(x, (y + 1), obj_collisionparent))
+	{
+	    sprite_index = spr_player_mach2jump;
+	    machhitAnim = 0;
+	    state = 23;
+		vsp = 10
+	}
 	if place_meeting(x, (y + 1), obj_collisionparent)
 	{
-	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        scr_sound(sound_enemystomp);
 	        with (obj_camera)
@@ -97,7 +104,7 @@ function scr_player_mach3() {
 	        image_index = 0;
 	        instance_create((x + 10), (y + 10), obj_bumpeffect);
 	    }
-	    if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        scr_sound(sound_enemystomp);
 	        with (obj_camera)
@@ -119,12 +126,12 @@ function scr_player_mach3() {
 	}
 	if (!(place_meeting(x, (y + 1), obj_collisionparent)))
 	{
-	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        machhitAnim = 0;
 	        state = 3;
 	    }
-	    else if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	    else if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    {
 	        machhitAnim = 0;
 	        state = 3;

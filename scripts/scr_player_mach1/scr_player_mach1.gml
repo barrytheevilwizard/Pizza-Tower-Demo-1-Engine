@@ -2,13 +2,13 @@ function scr_player_mach1() {
 	scr_getinput();
 	move = (key_left + key_right);
 	landAnim = 0;
-	if (place_meeting((x + 1), y, obj_collisionparent) && ((xscale == 1) && (!place_meeting((x + 1), y, obj_slopes))))
+	if (place_meeting((x + 1), y, obj_collisionparent) && ((xscale == 1) && (!place_meeting((x + 1), y, obj_slope))))
 	{
 	    mach2 = 0;
 	    state = 0;
 	    movespeed = 0;
 	}
-	if (place_meeting((x - 1), y, obj_collisionparent) && ((xscale == -1) && (!place_meeting((x - 1), y, obj_slopes))))
+	if (place_meeting((x - 1), y, obj_collisionparent) && ((xscale == -1) && (!place_meeting((x - 1), y, obj_slope))))
 	{
 	    mach2 = 0;
 	    state = 0;
@@ -74,7 +74,6 @@ function scr_player_mach1() {
 	    dir = xscale;
 	    momemtum = 1;
 	    vsp = -11;
-	    state = 44;
 	    jumpAnim = 1;
 	    image_index = 0;
 	}

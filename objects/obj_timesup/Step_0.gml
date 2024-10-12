@@ -1,4 +1,4 @@
-if (!place_meeting(x, (y + 1), obj_wall))
+if (!place_meeting(x, (y + 1), obj_solid))
     image_speed = 0;
 else if (floor(image_index) != 8)
     image_speed = 0.35;

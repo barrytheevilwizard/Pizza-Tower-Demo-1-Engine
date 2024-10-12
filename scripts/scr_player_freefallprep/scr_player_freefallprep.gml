@@ -1,7 +1,7 @@
 function scr_player_freefallprep(){
 	scr_getinput();
 	hsp = (xscale * movespeed);
-	if (((place_meeting((x + 1), y, obj_collisionparent) && move == 1) || (place_meeting((x - 1), y, obj_collisionparent) && move == -1)) && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	if (((place_meeting((x + 1), y, obj_collisionparent) && move == 1) || (place_meeting((x - 1), y, obj_collisionparent) && move == -1)) && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	    movespeed = 0;
 	start_running = 1;
 	alarm[4] = 14;
@@ -13,7 +13,7 @@ function scr_player_freefallprep(){
 	stopAnim = 1;
 	crouchslideAnim = 1;
 	crouchAnim = 1;
-	if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + 1), y, obj_slopes))))
+	if (place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!(place_meeting((x + 1), y, obj_slope))))
 	{
 	    movespeed = 0;
 	    state = 58;
@@ -23,7 +23,7 @@ function scr_player_freefallprep(){
 	    image_index = 0;
 	    instance_create((x + 10), (y + 10), obj_bumpeffect);
 	}
-	if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x - 1), y, obj_slopes))))
+	if (place_meeting((x - 1), y, obj_collisionparent) && xscale == -1 && (!(place_meeting((x - 1), y, obj_slope))))
 	{
 	    movespeed = 0;
 	    state = 58;

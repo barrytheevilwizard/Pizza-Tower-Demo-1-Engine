@@ -2,7 +2,7 @@ function scr_enemy_stun(){
 	stunned--;
 	sprite_index = stunfallspr;
 	image_speed = 0.35;
-	if ((place_meeting(x, (y + 1), obj_enemiesbumpable) || (place_meeting(x, (y + 1), obj_onewaywall) && (!(place_meeting(x, y, obj_onewaywall))))) && vsp > 0)
+	if ((place_meeting(x, (y + 1), obj_enemiesbumpable) || (place_meeting(x, (y + 1), obj_platform) && (!(place_meeting(x, y, obj_platform))))) && vsp > 0)
 	{
 	    hsp = 0;
 	    if (thrown == 1)

@@ -21,7 +21,7 @@ function scr_enemy_hit() {
 	    image_index = 0;
 	}
 	image_speed = 0.35;
-	if (((place_meeting((x + 1), y, obj_enemiesbumpable) && image_xscale == -1) || (place_meeting((x - 1), y, obj_enemiesbumpable) && image_xscale == 1)) && vsp > -5 && (!(place_meeting((x + sign(hsp)), y, obj_slopes))))
+	if (((place_meeting((x + 1), y, obj_enemiesbumpable) && image_xscale == -1) || (place_meeting((x - 1), y, obj_enemiesbumpable) && image_xscale == 1)) && vsp > -5 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
 	{
 	    image_index = 0;
 	    sprite_index = hitwallspr;
