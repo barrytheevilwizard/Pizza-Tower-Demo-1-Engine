@@ -6,8 +6,22 @@ function scr_player_climbwall()
 	vsp = (-movespeed);
 	if (movespeed > 0)
 	{
-		if movespeed < 12
-	    movespeed += 0.25;
+		if move == 1 * xscale
+		{
+			
+			if movespeed < 16
+			{
+				if movespeed < 12
+				movespeed += 0.05
+				else
+				movespeed += 0.025
+			}
+			else 
+			{
+				if movespeed < 20
+				movespeed += 0.01
+			}
+		}
 	}
 	crouchslideAnim = 1;
 	sprite_index = spr_player_climbwall;
@@ -20,7 +34,13 @@ function scr_player_climbwall()
 	{
 	    instance_create(x, y, obj_jumpdust);
 	    vsp = 0;
-	    state = 56;
+		if movespeed < 12
+		state = 56
+		else 
+		{
+			sprite_index = spr_player_mach4
+			state = 76
+		}
 	}
 	if ((place_meeting(x, (y + 1), obj_collisionparent) && (movespeed <= 0)) || (movespeed <= 0))
 	{

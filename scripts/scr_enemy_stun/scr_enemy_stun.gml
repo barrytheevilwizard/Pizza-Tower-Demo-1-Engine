@@ -4,7 +4,7 @@ function scr_enemy_stun(){
 	image_speed = 0.35;
 	if ((place_meeting(x, (y + 1), obj_enemiesbumpable) || (place_meeting(x, (y + 1), obj_platform) && (!(place_meeting(x, y, obj_platform))))) && vsp > 0)
 	{
-	    hsp = 0;
+	    hsp = Approach(hsp , 0,0.25)
 	    if (thrown == 1)
 	        instance_destroy();
 	}

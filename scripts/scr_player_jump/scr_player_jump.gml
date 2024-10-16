@@ -1,4 +1,5 @@
-function scr_player_jump() {
+function scr_player_jump()
+{
 	scr_getinput();
 	move = (key_left + key_right);
 	if (momemtum == 0)
@@ -7,25 +8,16 @@ function scr_player_jump() {
 	    hsp = (xscale * movespeed);
 	if ((move != xscale) && ((momemtum == 1) && (movespeed != 0)))
 	    movespeed -= 0.05;
-	if (movespeed == 0)
-	    momemtum = 0;
 	if (((move == 0) && (momemtum == 0)) || place_meeting((x + hsp), y, obj_solid))
 	    movespeed = 0;
 	if ((move != 0) && (movespeed < 6))
 	    movespeed += 0.25;
 	if (movespeed > 6)
 	    movespeed -= 0.05;
-	if (((place_meeting(x, (y + 1), obj_collisionparent) && (move == 1)) || (place_meeting(x, (y + 1), obj_collisionparent) && (move == -1))) && (!place_meeting((x + sign(hsp)), y, obj_slope)))
-	    movespeed = 0;
 	if (dir != xscale)
 	{
 	    dir = xscale;
 	    movespeed = 0;
-	}
-	if (move == (-xscale))
-	{
-	    movespeed = 0;
-	    momemtum = 0;
 	}
 	landAnim = 1;
 	if ((!key_jump2) && ((jumpstop == 0) && ((vsp < 0.5) && (stompAnim == 0)))) && slammed == 0
@@ -43,12 +35,10 @@ function scr_player_jump() {
 	if ((place_meeting(x, (y + 1), obj_collisionparent) && ((input_buffer_jump < 8) && ((!key_down) && ((!key_attack) && (vsp > 0))))) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall))))
 	{
 	    scr_sound(sound_jump);
-	    if (move == 0)
-	        sprite_index = spr_player_jump;
-	    if (move != 0)
-	        sprite_index = spr_player_secondjump1;
 	    if (shotgunAnim == 1)
 	        sprite_index = spr_shotgun_jump;
+		else
+		 sprite_index = spr_player_jump;
 	    instance_create(x, y, obj_highjumpcloud2);
 	    stompAnim = 0;
 	    vsp = -11;
@@ -65,7 +55,7 @@ function scr_player_jump() {
 	    mach2 = 0;
 	    sprite_index = spr_player_mach1;
 	    jumpAnim = 1;
-	    state = 55;
+	    state = 56;
 	    image_index = 0;
 	}
 	if ((place_meeting(x, (y + 1), obj_collisionparent) && (vsp > 0)) && (!key_attack))
@@ -151,13 +141,24 @@ function scr_player_jump() {
 	image_speed = 0.35;
 	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall)))))
 	{
-	    if (slaphand == 1)
-	        sprite_index = spr_player_slap1air;
-	    if (slaphand == -1)
-	        sprite_index = spr_player_slap2air;
-	    state = 1;
+	    state = 19;
 	    image_index = 0;
-	    slaphand *= -1;
+		sprite_index = spr_player_suplexgrabjumpstart
+		if movespeed < 4
+		movespeed = 4
+		scr_sound(sfx_suplexdash)
+	}
+	if key_down && !place_meeting(x, (y + 1), obj_collisionparent) && sprite_index != spr_player_freefall
+	{
+		state = 79
+		image_index = 0
+		vsp = -6
+		scr_sound(sfx_break)
+	}
+	if sprite_index == spr_player_freefall
+	{
+		with instance_place(x,y + vsp,obj_destructibles)
+		instance_destroy()
 	}
 	scr_collideandmove();
 }

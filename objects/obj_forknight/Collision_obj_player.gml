@@ -54,19 +54,28 @@ if (state != 92)
             image_index = 0;
             state = 43;
         }
-        if (state == 56 && other.grounded == 1)
+        if (state == 56)
         {
-            scr_sound(sound_enemystomp);
-            other.hp = 0;
-            instance_create(x, y, obj_bumpeffect);
-            other.vsp = -10;
-            other.hsp = xscale;
-            other.image_index = 0;
-            other.stunned = 200;
-            other.state = 89;
-            machpunchAnim = 1;
-            if ((!(place_meeting(x, (y + 1), obj_collisionparent))) && state != 60)
-                vsp = -10;
+			with other 
+			{
+				if place_meeting(x,y + 1,obj_collisionparent)
+				{
+					scr_sound(sound_enemystomp);
+					hp = 0;
+					instance_create(x, y, obj_bumpeffect);
+					vsp = -9;
+					hsp = 10 * other.xscale;
+					image_index = 0;
+					stunned = 200;
+					state = 89;
+					other.machpunchAnim = 1;
+					with other 
+					{
+						if ((!(place_meeting(x, (y + 1), obj_collisionparent))) && state != 60)
+						 vsp = -10;
+					}
+				}
+			}
         }
         if (attacking == 1 && state != 56)
         {
@@ -77,25 +86,6 @@ if (state != 92)
             machpunchAnim = 1;
             if ((!(place_meeting(x, (y + 1), obj_collisionparent))) && state != 60)
                 vsp = -10;
-        }
-        if (attacking == 0 && state != 43 && state != 59 && (!(y < other.y)) && grabbing == 0 && other.state != 89)
-        {
-            if (x != other.x)
-            {
-                other.image_xscale = (-(sign((other.x - x))));
-                xscale = (-(sign((x - other.x))));
-            }
-            hsp = ((-xscale) * 4);
-            vsp = -4;
-            other.image_xscale = (-xscale);
-            other.hsp = ((-other.image_xscale) * 4);
-            other.vsp = -4;
-            if (other.state == 85 || other.state == 81)
-                other.state = 79;
-            image_index = 0;
-            state = 58;
-            if (other.state == 87)
-                other.state = 79;
         }
     }
 }

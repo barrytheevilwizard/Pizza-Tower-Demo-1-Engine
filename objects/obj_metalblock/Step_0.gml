@@ -1,4 +1,4 @@
-if ((place_meeting((x + 1), y, obj_player) || place_meeting((x - 1), y, obj_player)) && ((obj_player.state == 76) || ((obj_player.state == 4) || ((obj_player.state == 23) || ((obj_player.state == 10) && (obj_player.momemtum == 1))))))
+if ((place_meeting((x + 1), y, obj_player) || place_meeting((x - 1), y, obj_player)) && ((obj_player.state == 76) || ((obj_player.state == 4) || ((obj_player.state == 10) && (obj_player.momemtum == 1)))))
     instance_destroy();
 if (place_meeting(x, (y - 1), obj_player) && ((obj_player.state == 10) || (obj_player.state == 63)))
 {

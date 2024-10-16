@@ -15,7 +15,7 @@ else {
 }
 if (toppineaten == 5) sprite_index = spr_hungrypillar_happy;
 if (place_meeting((x + 1), y, obj_player) && (sprite_index != spr_hungrypillar_happy)) {
-    obj_tv.message = "STEP BACK!!";
+    obj_tv.message = "you shall not pass";
     obj_tv.showtext = 1;
     obj_tv.tvsprite = spr_tvpillar;
     obj_tv.alarm[0] = 150;

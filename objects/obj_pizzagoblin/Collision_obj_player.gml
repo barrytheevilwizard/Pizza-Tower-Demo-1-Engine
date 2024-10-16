@@ -59,8 +59,8 @@ if (state != 92)
             scr_sound(sound_enemystomp);
             other.hp = 0;
             instance_create(x, y, obj_bumpeffect);
-            other.vsp = -10;
-            other.hsp = xscale;
+            other.vsp = -6;
+            other.hsp = 10 * xscale;
             other.image_index = 0;
             other.stunned = 200;
             other.state = 89;

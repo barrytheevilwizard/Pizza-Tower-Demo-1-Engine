@@ -17,6 +17,12 @@ if (y > old_y && (bbox_bottom % 16) == 0 && (!(place_meeting(x, old_y, obj_onewa
     y = old_y
     return 1;
 }
+if (y > old_y && (bbox_top % 16) == 0 && (!(place_meeting(x, old_y, obj_upsidedownplatform))) && place_meeting(x, y, obj_upsidedownplatform))
+{
+    x = old_x
+    y = old_y
+    return 1;
+}
 var slope = instance_place(x, y, obj_slope)
 if slope
 {

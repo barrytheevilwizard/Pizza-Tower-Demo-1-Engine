@@ -31,6 +31,35 @@ function scr_collideandmoveonlywall() {
 	        break
 	    }
 	}
+	if (_temp_local_var_1 <= 0)
+	{
+	}
+	else
+	{
+	    while (true)
+	    {
+	        if (! place_meeting(x, (y - sign(vsp)), obj_enemiesbumpable))
+	        {
+	            _temp_local_var_12 = ((vsp >= 0) && (place_meeting(x, (y - 1), obj_upsidedownplatform) && (! place_meeting(x, y, obj_upsidedownplatform))))
+	            _temp_local_var_12 = (! _temp_local_var_12)
+	        }
+	        else
+	            _temp_local_var_12 = 0
+	        if _temp_local_var_12
+	        {
+	            y = (y - sign(vsp))
+	            _temp_local_var_2 = (_temp_local_var_2 - 1)
+	            if _temp_local_var_2
+	                continue
+	        }
+	        else
+	        {
+	            vsp = 0
+	            break
+	        }
+	        break
+	    }
+	}
 	_temp_local_var_3 = abs(hsp)
 	_temp_local_var_2 = _temp_local_var_3
 	if (_temp_local_var_3 <= 0)

@@ -15,8 +15,8 @@
     "path": "folders/Objects/Level Structure/Destroyables.yy",
   },
   "parentObjectId": {
-    "name": "obj_bumpable",
-    "path": "objects/obj_bumpable/obj_bumpable.yy",
+    "name": "obj_solid",
+    "path": "objects/obj_solid/obj_solid.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,

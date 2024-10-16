@@ -17,23 +17,19 @@ function scr_player_grabbing(){
 	    movespeed = 0;
 	if (xscale == -1 && move == 1)
 	    movespeed = 0;
-	if (key_attack && place_meeting(x, (y + 1), obj_collisionparent))
+	if key_slap2 
 	{
-	    movespeed = 0;
-	    image_index = 0;
-	    state = 32;
-	}
-	if (key_attack && (!(place_meeting(x, (y + 1), obj_collisionparent))))
-	{
-	    movespeed = 0;
-	    image_index = 0;
 	    state = 27;
+	    image_index = 1;
+	    image_speed = 0.35;
+	    scr_sound(sound_enemyslap);
 	}
-	if (key_jump && (!(place_meeting(x, (y + 1), obj_collisionparent))))
+	if (key_down && (!(place_meeting(x, (y + 1), obj_collisionparent))))
 	{
-	    movespeed = 0;
+	    scr_sound(sound_jump);
+	    sprite_index = spr_player_piledriver;
 	    vsp = -11;
-	    state = 28;
+	    state = 29;
 	    image_index = 0;
 	    image_speed = 0.35;
 	}

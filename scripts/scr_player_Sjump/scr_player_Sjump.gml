@@ -10,8 +10,9 @@ function scr_player_Sjump(){
 	crouchslideAnim = 1;
 	crouchAnim = 0;
 	machhitAnim = 0;
+	move = (key_left + key_right)
 	if (sprite_index == spr_player_superjump)
-	    vsp--;
+	    vsp -= 0.65;
 	if (sprite_index == spr_player_supersidejump)
 	{
 	    if (a < 25)
@@ -46,6 +47,26 @@ function scr_player_Sjump(){
 	    image_index = 0;
 	    state = 78;
 	    machhitAnim = 0;
+	}
+	if (key_slap2 || key_attack2) && sprite_index != spr_player_Sjumpcancelstart
+	{
+		sprite_index = spr_player_Sjumpcancelstart
+		image_index = 0
+	}
+	if sprite_index == spr_player_Sjumpcancelstart
+	{
+		if move != 0
+		xscale = move
+		vsp = 0
+	}
+	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_Sjumpcancelstart))
+	{
+		state = 76
+		image_index = 0
+	    sprite_index = spr_player_Sjumpcancel;
+		movespeed = 12
+		vsp = -6
+		flash = 1
 	}
 	image_speed = 0.5;
 	scr_collideandmovesuperjump();

@@ -146,7 +146,7 @@ function scr_player_normal() {
 	{
 	    sprite_index = spr_player_mach1;
 	    jumpAnim = 1;
-	    state = 55;
+	    state = 56;
 	    image_index = 0;
 	}
 	if (key_up && key_attack2)
@@ -159,12 +159,10 @@ function scr_player_normal() {
 	if (key_jump && (place_meeting(x, (y + 1), obj_collisionparent)) && (!key_down))
 	{
 	    scr_sound(sound_jump);
-	    if (move == 0)
-	        sprite_index = spr_player_jump;
-	    if (move != 0)
-	        sprite_index = spr_player_secondjump1;
 	    if (shotgunAnim == 1)
 	        sprite_index = spr_shotgun_jump;
+		else 
+		sprite_index = spr_player_jump;
 	    instance_create(x, y, obj_highjumpcloud2);
 	    vsp = -11;
 	    state = 44;
@@ -174,12 +172,10 @@ function scr_player_normal() {
 	if ((place_meeting(x, (y + 1), obj_collisionparent)) && ((input_buffer_jump < 8) && ((!key_down) && ((!key_attack) && (vsp > 0)))))
 	{
 	    scr_sound(sound_jump);
-	    if (move == 0)
-	        sprite_index = spr_player_jump;
-	    if (move != 0)
-	        sprite_index = spr_player_secondjump1;
 	    if (shotgunAnim == 1)
 	        sprite_index = spr_shotgun_jump;
+		else 
+		sprite_index = spr_player_jump;
 	    instance_create(x, y, obj_highjumpcloud2);
 	    stompAnim = 0;
 	    vsp = -11;
@@ -233,13 +229,12 @@ function scr_player_normal() {
 	    image_speed = 0.35;
 	if (key_slap2 && (shotgunAnim == 0))
 	{
-	    if (slaphand == 1)
-	        sprite_index = spr_player_slap1;
-	    if (slaphand == -1)
-	        sprite_index = spr_player_slap2;
-	    state = 1;
+	    state = 19;
 	    image_index = 0;
-	    slaphand *= -1;
+		sprite_index = spr_player_suplexdash
+		if movespeed < 4
+		movespeed = 4
+		scr_sound(sfx_suplexdash)
 	}
 	if ((!instance_exists(obj_cloudeffect)) && (place_meeting(x, (y + 1), obj_collisionparent)) && ((move != 0) && ((floor(image_index) == 4) || (floor(image_index) == 10))))
 	    instance_create(x, (y + 43), obj_cloudeffect);

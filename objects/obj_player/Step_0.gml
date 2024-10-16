@@ -226,6 +226,9 @@ with (obj_player) {
 		case 78:
 			scr_player_Sjumpland();
 			break;
+		case 79:
+			scr_player_freefallstart();
+			break
     }
 	if place_meeting(x, (y + 1), obj_collisionparent) && state != 63 && slammed == 1 {
 		slammed = 0;
@@ -237,20 +240,27 @@ with (obj_player) {
     }
     else
         audio_stop_sound(sound_dash1);
-    if state == 56 && place_meeting(x, (y + 1), obj_collisionparent)
+    if (state == 56 && place_meeting(x, (y + 1), obj_collisionparent)) || state == 3
     {
         if (!audio_is_playing(sound_dash2))
             scr_sound(sound_dash2);
     }
     else
         audio_stop_sound(sound_dash2);
-	if state == 76 && place_meeting(x, (y + 1), obj_collisionparent)
+	if (state == 76 && place_meeting(x, (y + 1), obj_collisionparent))
 	{
         if (!audio_is_playing(sound_dash3))
             scr_sound(sound_dash3);
     }
     else
         audio_stop_sound(sound_dash3);
+	if state == 23
+	{
+        if (!audio_is_playing(sound_dashroll))
+            scr_sound(sound_dashroll);
+    }
+    else
+        audio_stop_sound(sound_dashroll);
     if ((sprite_index == spr_player_idlevomit) && ((image_index > 28) && (image_index < 43)))
         instance_create((x + random_range(-5, 5)), (y + 46), obj_vomit);
     if ((sprite_index == spr_player_idlevomitblood) && ((image_index > 28) && (image_index < 43)))
@@ -311,7 +321,7 @@ with (obj_player) {
         idle = 0;
         dashdust = 0;
     }
-    if ((state != 55) && ((state != 44) && ((state != 0) && ((state != 56) && ((state != 76) && ((state != 77) && ((state != 10) && ((state != 24) && (state != 4)))))))))
+    if (state != 55) && ((state != 44) && ((state != 0) && ((state != 56) && ((state != 76) && ((state != 19) && ((state != 77) && ((state != 10) && ((state != 24) && (state != 4)))))))))
         momemtum = 0;
     if (state != 19)
         chainsaw = 50;
@@ -337,7 +347,7 @@ with (obj_player) {
         ladderbuffer = 0;
     if (state != 44)
         stompAnim = 0;
-    if (((state == 76) || ((state == 23) || ((state == 57) && (mach2 >= 100)))) && (!instance_exists(obj_mach3effect)))
+    if (((state == 76) || ((state == 23) || ((state == 19) || ((state == 56) || ((state == 57) && (mach2 >= 100)))))) && (!instance_exists(obj_mach3effect)))
     {
         toomuchalarm1 = 6;
         instance_create(x, y, obj_mach3effect);
@@ -345,7 +355,7 @@ with (obj_player) {
     if (toomuchalarm1 > 0)
     {
         toomuchalarm1 -= 1;
-        if ((toomuchalarm1 <= 0) && ((state == 76) || (((state == 57) && (mach2 >= 100)) || ((state == 23) || ((state == 19) && (mach2 >= 100))))))
+        if ((toomuchalarm1 <= 0) && ((state == 76) || ((state == 19) || ((state == 23) || ((state == 56) || ((state == 57) && (mach2 >= 100)))))))
         {
             instance_create(x, y, obj_mach3effect);
             toomuchalarm1 = 6;
@@ -353,7 +363,7 @@ with (obj_player) {
     }
     if ((state != 60) && (state != 29))
         obj_camera.zoom = 0;
-    if ((state != 58) && ((state != 52) && (((state != 25) && (sprite_index != spr_player_crouchshoot)) && ((state != 51) && ((state != 19) && ((state != 23) && ((state != 59) && ((state != 54) && (state != 53) && sprite_index != spr_player_machroll))))))))
+    if ((state != 58) && ((state != 52) && (((state != 25) && (sprite_index != spr_player_crouchshoot)) && ((state != 51) && ((state != 23) && ((state != 59) && ((state != 54) && (state != 53) && sprite_index != spr_player_machroll)))))))
         mask_index = spr_player_mask;
     else
         mask_index = spr_crouchmask;

@@ -6,8 +6,24 @@ function scr_player_machroll()
 	machslideAnim = 1;
 	move = (key_right + key_left);
 	if !place_meeting(x,y - 3,obj_collisionparent) && !key_down && sprite_index == spr_player_machroll
-	    state = 56;
-	if place_meeting((x + xscale), y, obj_collisionparent)
+	{
+		if !key_attack 
+		{
+			 sprite_index = spr_player_land
+			 state = 0
+		}
+		else
+		{
+			if movespeed < 12
+			state = 56
+			else 
+			{
+				sprite_index = spr_player_mach4
+				state = 76
+			}
+		}
+	}
+	if place_meeting((x + xscale), y, obj_collisionparent) && !place_meeting((x + xscale), y, obj_destructibles) && !place_meeting((x + xscale), y, obj_slope)
 	{
 	    with (obj_camera)
 	    {
@@ -39,14 +55,23 @@ function scr_player_machroll()
 		sprite_index = spr_player_bump;
 		
 	}
-	if (place_meeting(x, (y + 1), obj_collisionparent)) && !place_meeting((x + xscale), y, obj_collisionparent)
+	if (place_meeting(x, (y + 1), obj_collisionparent)) && !place_meeting((x + xscale), y, obj_collisionparent) && sprite_index != spr_player_machroll
 		sprite_index = spr_player_machroll;
-	else if !place_meeting(x,y + 1,obj_collisionparent)
-		sprite_index = spr_player_mach2jump;
-	if (floor(image_index) == 0)
-		flash = 1;
-	else
-		flash = 0;
+	else if !place_meeting(x,y + 1,obj_collisionparent) && sprite_index != spr_player_dive
+	{
+		sprite_index = spr_player_dive;
+		vsp = 10
+	}
+	
+	if sprite_index == spr_player_dive && key_jump
+	{
+		state = 79
+		image_index = 0
+		vsp = -6
+		scr_sound(sfx_break)
+	}
+	if movespeed < 6
+	movespeed += 0.25
 	if ((!instance_exists(obj_cloudeffect)) && (place_meeting(x, (y + 1), obj_collisionparent) && (!place_meeting(x, (y + 1), obj_water)))) instance_create(x, (y + 43), obj_cloudeffect)
 		image_speed = 0.8;
 	scr_collideandmove();
