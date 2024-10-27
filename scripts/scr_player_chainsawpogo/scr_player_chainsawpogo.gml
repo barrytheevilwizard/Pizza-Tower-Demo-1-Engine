@@ -1,58 +1,85 @@
 function scr_player_chainsawpogo(){
 	scr_getinput();
 	hsp = (xscale * movespeed);
-	if ((place_meeting((x + 1), y, obj_bumpable) && xscale == 1) || (place_meeting((x - 1), y, obj_bumpable) && xscale == -1))
-	    movespeed = 0;
-	landAnim = 1;
-	if (ladderbuffer > 0)
-	    ladderbuffer--;
-	if (place_meeting(x, (y - 1), obj_collisionparent) && jumpstop == 0 && jumpAnim == 1)
+	momemtum = 1;
+	move2 = (key_right2 + key_left2);
+	move = (key_right + key_left);
+	if move == 1 * xscale
 	{
-	    vsp = grav;
-	    jumpstop = 1;
+		if movespeed < 10
+		movespeed += 0.25
 	}
-	if (place_meeting((x + 1), y, obj_bumpable) && xscale == 1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
+	if move == -1 * xscale
 	{
-	    machhitAnim = 0;
-	    state = 7;
-	    hsp = -2.5;
-	    vsp = -3;
-	    mach2 = 0;
+		if movespeed > -10
+		movespeed -= 0.5
+	}
+	if sprite_index != spr_player_chainsawland && sprite_index != spr_player_chainsawspin
+	sprite_index = spr_player_chainsawbounceair
+	if grounded && vsp > 0 && sprite_index == spr_player_chainsawbounceair
+	{
+		sprite_index = spr_player_chainsawland
+		image_index = 0
+		vsp = -17
+		image_index = 0;
+	    with (obj_baddie)
+	    {
+	        if point_in_rectangle(x, y, view_xport[0], view_yport[0], (view_xport[0] + view_wport[0]), (view_yport[0] + view_hport[0]))
+	        {
+	            vsp = -7;
+	            hsp = 0;
+	        }
+	    }
+	    with (obj_camera)
+	    {
+	        shake_mag = 10;
+	        shake_mag_acc = (30 / room_speed);
+	    }
+	}
+	else if grounded && vsp > 0 && sprite_index == spr_player_chainsawspin
+	{
+		if key_attack
+		{
+			if !key_down 
+			{
+				if movespeed < 12
+				state = 56
+				else 
+				{
+					sprite_index = spr_player_mach4
+					state = 76
+				}
+				if movespeed < 0
+				movespeed *= -1
+				if move != 0 
+				xscale = move
+			}
+			else
+			{
+				sprite_index = spr_player_machroll;
+				machhitAnim = 0;
+				state = 23;
+				if move != 0 
+				xscale = move
+				if movespeed < 0
+				movespeed *= -1
+			}
+		}
+		else 
+		state = 0
+	}
+	if floor(image_index) == (image_number - 1) && sprite_index == spr_player_chainsawland
+	sprite_index = spr_player_chainsawspin
+	if key_down && sprite_index == spr_player_chainsawspin
+	vsp += 1.25
+	if key_slap2 && key_up
+	{
+	    state = 80;
 	    image_index = 0;
-	    instance_create((x + 10), (y + 10), obj_bumpeffect);
-	    audio_sound_gain(sfx_bump, 0.7, 0);
-	    if (!audio_is_playing(sfx_bump))
-	        audio_play_sound(sfx_bump, 1, false);
+		sprite_index = spr_player_slapup
+		flash = 1
+		vsp = -14
+		scr_sound(sfx_suplexdash)
 	}
-	else if (place_meeting((x - 1), y, obj_bumpable) && xscale == -1 && (!(place_meeting((x + sign(hsp)), y, obj_slope))))
-	{
-	    machhitAnim = 0;
-	    state = 7;
-	    hsp = 2.5;
-	    vsp = -3;
-	    mach2 = 0;
-	    image_index = 0;
-	    instance_create((x - 10), (y + 10), obj_bumpeffect);
-	    audio_sound_gain(sfx_bump, 0.7, 0);
-	    if (!audio_is_playing(sfx_bump))
-	        audio_play_sound(sfx_bump, 1, false);
-	}
-	if (!key_down)
-	{
-	    instance_create(x, y, obj_chainsawhitbox);
-	    sprite_index = spr_player_chainsawair;
-	    state = 19;
-	}
-	if (sprite_index != spr_player_chainsawpogobounce)
-	{
-	    if (sprite_index == spr_player_chainsawpogo1 && floor(image_index) == 3)
-	        sprite_index = spr_player_chainsawpogo2;
-	}
-	else if (floor(image_index) == 4)
-	    sprite_index = spr_player_chainsawpogo2;
-	image_speed = 0.35;
-	if (move != 0)
-	    xscale = move;
-	image_speed = 0.35;
 	scr_collideandmove();
 }

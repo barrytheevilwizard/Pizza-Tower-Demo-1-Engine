@@ -229,6 +229,9 @@ with (obj_player) {
 		case 79:
 			scr_player_freefallstart();
 			break
+		case 80:
+			scr_player_upslap()
+			break;
     }
 	if place_meeting(x, (y + 1), obj_collisionparent) && state != 63 && slammed == 1 {
 		slammed = 0;

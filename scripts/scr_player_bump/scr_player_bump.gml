@@ -7,7 +7,7 @@ function scr_player_bump() {
 	start_running = 1;
 	alarm[4] = 14;
 	if (place_meeting(x, (y + 1), obj_collisionparent) && vsp > 0)
-	    hsp = 0;
+	    hsp = Approach(hsp,0,0.25);
 	if (floor(image_index) == 6)
 	    state = 0;
 	sprite_index = spr_player_bump;

@@ -139,13 +139,22 @@ function scr_player_jump()
 	if (move != 0)
 	    xscale = move;
 	image_speed = 0.35;
-	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall)))))
+	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall))))) && !key_up
 	{
 	    state = 19;
 	    image_index = 0;
 		sprite_index = spr_player_suplexgrabjumpstart
-		if movespeed < 4
-		movespeed = 4
+		if movespeed < 13
+		movespeed = 13
+		scr_sound(sfx_suplexdash)
+	}
+	else if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall))))) && key_up
+	{
+	    state = 80;
+	    image_index = 0;
+		sprite_index = spr_player_slapup
+		flash = 1
+		vsp = -14
 		scr_sound(sfx_suplexdash)
 	}
 	if key_down && !place_meeting(x, (y + 1), obj_collisionparent) && sprite_index != spr_player_freefall

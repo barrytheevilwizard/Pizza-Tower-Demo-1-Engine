@@ -227,13 +227,22 @@ function scr_player_normal() {
 	}
 	else
 	    image_speed = 0.35;
-	if (key_slap2 && (shotgunAnim == 0))
+	if (key_slap2 && (shotgunAnim == 0)) && !key_up
 	{
 	    state = 19;
 	    image_index = 0;
 		sprite_index = spr_player_suplexdash
-		if movespeed < 4
-		movespeed = 4
+		if movespeed < 13
+		movespeed = 13
+		scr_sound(sfx_suplexdash)
+	}
+	else if (key_slap2 && (shotgunAnim == 0)) && key_up
+	{
+	    state = 80;
+	    image_index = 0;
+		sprite_index = spr_player_slapup
+		flash = 1
+		vsp = -14
 		scr_sound(sfx_suplexdash)
 	}
 	if ((!instance_exists(obj_cloudeffect)) && (place_meeting(x, (y + 1), obj_collisionparent)) && ((move != 0) && ((floor(image_index) == 4) || (floor(image_index) == 10))))

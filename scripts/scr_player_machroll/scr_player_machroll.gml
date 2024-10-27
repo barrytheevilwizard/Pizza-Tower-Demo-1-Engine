@@ -5,7 +5,7 @@ function scr_player_machroll()
 	mach2 = 100;
 	machslideAnim = 1;
 	move = (key_right + key_left);
-	if !place_meeting(x,y - 3,obj_collisionparent) && !key_down && sprite_index == spr_player_machroll
+	if !place_meeting(x,y - 3,obj_collisionparent) && !key_down && grounded
 	{
 		if !key_attack 
 		{
@@ -55,12 +55,12 @@ function scr_player_machroll()
 		sprite_index = spr_player_bump;
 		
 	}
-	if (place_meeting(x, (y + 1), obj_collisionparent)) && !place_meeting((x + xscale), y, obj_collisionparent) && sprite_index != spr_player_machroll
+	if ((place_meeting(x, (y + 1), obj_solid)) || (place_meeting(x, (y + 1), obj_slope))) && !place_meeting((x + xscale), y, obj_collisionparent) && sprite_index != spr_player_machroll
 		sprite_index = spr_player_machroll;
 	else if !place_meeting(x,y + 1,obj_collisionparent) && sprite_index != spr_player_dive
 	{
-		sprite_index = spr_player_dive;
 		vsp = 10
+		sprite_index = spr_player_dive
 	}
 	
 	if sprite_index == spr_player_dive && key_jump
@@ -69,6 +69,29 @@ function scr_player_machroll()
 		image_index = 0
 		vsp = -6
 		scr_sound(sfx_break)
+	}
+	with instance_place(x,y + 1,obj_slope) 
+	{
+		if (sign(image_xscale) == (-sign(other.xscale)))
+        {
+			if other.movespeed < 12
+			{
+				if (abs(image_yscale) < abs(image_xscale))
+					other.movespeed += 0.25
+				else
+					other.movespeed += 0.5
+			}
+        }
+		if (sign(image_xscale) == (sign(other.xscale)))
+        {
+			if other.movespeed > 10
+			{
+				if (abs(image_yscale) < abs(image_xscale))
+					other.movespeed -= 0.25
+				else
+					other.movespeed -= 0.5
+			}
+        }
 	}
 	if movespeed < 6
 	movespeed += 0.25

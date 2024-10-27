@@ -1,3 +1,3 @@
 targetRoom = acient1;
-target_x = 512;
-target_y = 480;
+target_x = 3104;
+target_y = 448;

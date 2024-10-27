@@ -2,19 +2,15 @@ function scr_enemy_stun(){
 	stunned--;
 	sprite_index = stunfallspr;
 	image_speed = 0.35;
-	if ((place_meeting(x, (y + 1), obj_enemiesbumpable) || (place_meeting(x, (y + 1), obj_platform) && (!(place_meeting(x, y, obj_platform))))) && vsp > 0)
+	if (place_meeting(x,y + 1,obj_solid) && vsp > 0) || place_meeting(x,y - 1,obj_solid) || place_meeting(x,y + 1,obj_slope) || place_meeting(x,y + 1,obj_platform)
 	{
 	    hsp = Approach(hsp , 0,0.25)
 	    if (thrown == 1)
 	        instance_destroy();
 	}
-	if ((place_meeting((x + 1), y, obj_enemiesbumpable) && image_xscale == -1) || (place_meeting((x - 1), y, obj_enemiesbumpable) && image_xscale == 1))
-	{
-	    with (instance_create(x, y, obj_bulletimpact))
-	        image_xscale = (-other.image_xscale);
-	    image_xscale *= -1;
-	    hsp = ((-image_xscale) * 4);
-	}
+	
+	if thrown && place_meeting(x + image_xscale,y,obj_solid)
+	instance_destroy();
 	scr_collideandmoveonlywall();
 	if (floor(image_index) == (image_number - 1) && stunned < 0)
 	{

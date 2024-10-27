@@ -11,7 +11,10 @@ function scr_player_chainsaw()
 		else
 		{
 			if movespeed < 12
-			state = 56
+			{
+				state = 56
+				movespeed = 8
+			}
 			else 
 			{
 				sprite_index = spr_player_mach4
@@ -26,14 +29,15 @@ function scr_player_chainsaw()
 	scr_getinput();
 	hsp = (xscale * movespeed);
 	move = (key_right + key_left);
-	if movespeed < 10
-	movespeed += 0.5
+	if movespeed > 2
+	movespeed -= 0.35
 	if key_jump && place_meeting(x,y + 1,obj_collisionparent)
 	{
 		vsp = -11
 		sprite_index = spr_player_secondjump1
 		image_index = 0
 		state = 56
+		movespeed = 8
 	}
 	if (place_meeting((x + xscale), y, obj_collisionparent) && (!(place_meeting((x + sign(hsp)), y, obj_slope)))) && !place_meeting(x + hsp,y,obj_destructibles)
 	{
@@ -42,18 +46,38 @@ function scr_player_chainsaw()
     }
 	if move == -1 * xscale
 	state = 0
-	if place_meeting(x + hsp,y,obj_baddie)
+	with instance_place(x,y,obj_baddie) 
 	{
-		state = 14
-		instance_nearest(x,y,obj_baddie).state = 92
+		with other 
+		{
+			scr_sound(sound_enemyslap);
+	        state = 58;
+	        hsp = -6 * xscale;
+	        mach2 = 0;
+	        image_index = 0;
+	        instance_create((x + 10 * xscale), (y + 10), obj_bangeffect);
+			flash = 1
+		}
+		instance_create((x + (obj_player.xscale * 30)), y, obj_bumpeffect);
+	    alarm[1] = 5;
+	    thrown = 1;
+	    x = obj_player.x;
+	    y = obj_player.y;
+		stunned = 200
+	    state = 89;
+	    hsp = ((obj_player.xscale) * 25);
+	    vsp = -7;
 		scr_sound(sound_enemyslap)
-		flash = 1
 	}
 	if (key_down && place_meeting(x, (y + 1), obj_collisionparent))
 	{
-	    sprite_index = spr_player_machroll;
+	    sprite_index = spr_player_crouchslip;
 	    machhitAnim = 0;
-	    state = 23;
+	    state = 54;
+		if movespeed < 12
+		movespeed = 12
+		else
+		movespeed += 6
 	}
 	with instance_place(x + hsp,y,obj_destructibles)
 	instance_destroy()

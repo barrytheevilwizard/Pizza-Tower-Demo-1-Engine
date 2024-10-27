@@ -67,7 +67,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"fdc75ebd-d9a9-451b-bbba-8af0e9013bde","path":"sprites/spr_player_Sjump/spr_player_Sjump.yy",},},},"Disabled":false,"id":"50df2849-01c6-445b-883d-a8c221d727f0","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 50,
     "yorigin": 50,

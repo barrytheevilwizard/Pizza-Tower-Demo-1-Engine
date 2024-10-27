@@ -6,41 +6,28 @@ function scr_player_mach3() {
 	mach2 = 100;
 	momemtum = 1;
 	move = (key_right + key_left);
-	if place_meeting(x,y + 1,obj_collisionparent)
+	if !place_meeting(x,y + 1,obj_slope)
+	movespeed = 12
+	else
 	{
-		if move == 1 * xscale
-		{
-			if movespeed < 16
-			{
-				with (instance_place(x, (y + 1), obj_slope))
-				{
-					if (sign(image_xscale) == (sign(other.xscale)))
-					other.movespeed -= 0.025
-				}	
-				movespeed += 0.025
-			}
-			else 
-			{
-				with (instance_place(x, (y + 1), obj_slope))
-				{
-					if (sign(image_xscale) == (sign(other.xscale)))
-					other.movespeed -= 0.01
-				}
-				if movespeed < 20
-				movespeed += 0.01
-			}
-		}
-	}
 	with (instance_place(x, (y + 1), obj_slope))
     {
         if (sign(image_xscale) == (-sign(other.xscale)))
         {
             if (abs(image_yscale) < abs(image_xscale))
-                other.movespeed += 0.15
+                other.movespeed = 14
             else
-                other.movespeed += 0.30
+                other.movespeed = 15
+        }
+		if (sign(image_xscale) == (sign(other.xscale)))
+        {
+            if (abs(image_yscale) < abs(image_xscale))
+                other.movespeed = 10
+            else
+                other.movespeed = 9
         }
     }
+	}
 	crouchslideAnim = 1;
 	if ((input_buffer_jump < 8) && (place_meeting(x, (y + 1), obj_collisionparent) && ((!((move == 1) && (xscale == -1))) && ((!((move == -1) && (xscale == 1))) && key_attack))))
 	{
@@ -66,11 +53,9 @@ function scr_player_mach3() {
 	    input_buffer_jump = 0;
 	if (key_up && place_meeting(x, (y + 1), obj_collisionparent))
 	{
-	    sprite_index = spr_player_superjumpprep;
-	    state = 51;
-	    hsp = 0;
-	    image_index = 0;
-		
+	    sprite_index = spr_player_backbreaker;
+	    state = 49;
+		image_index = 0
 	}
 	if ((!key_attack) && (place_meeting(x, (y + 1), obj_collisionparent) && (autodash == 0)))
 	{
@@ -158,16 +143,25 @@ function scr_player_mach3() {
 	    state = 24
 	    image_index = 0
 	}
-	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall)))))
+	if (key_slap2 && shotgunAnim == 0) && !key_up
 	{
 	    state = 19;
 	    image_index = 0;
-		if movespeed < 4
-		movespeed = 4
+		if movespeed < 13
+		movespeed = 13
 		if !place_meeting(x,y + 1,obj_collisionparent)
 		sprite_index = spr_player_suplexgrabjumpstart
 		else
 		sprite_index = spr_player_suplexdash
+		scr_sound(sfx_suplexdash)
+	}
+	else if (key_slap2 && shotgunAnim == 0) && key_up
+	{
+	    state = 80;
+	    image_index = 0;
+		sprite_index = spr_player_slapup
+		flash = 1
+		vsp = -14
 		scr_sound(sfx_suplexdash)
 	}
 	image_speed = 0.4;

@@ -4,25 +4,8 @@ function scr_player_climbwall()
 	if (windingAnim < 200)
 	    windingAnim++;
 	vsp = (-movespeed);
-	if (movespeed > 0)
-	{
-		if move == 1 * xscale
-		{
-			
-			if movespeed < 16
-			{
-				if movespeed < 12
-				movespeed += 0.05
-				else
-				movespeed += 0.025
-			}
-			else 
-			{
-				if movespeed < 20
-				movespeed += 0.01
-			}
-		}
-	}
+	if movespeed < 12
+	movespeed += 0.25
 	crouchslideAnim = 1;
 	sprite_index = spr_player_climbwall;
 	if (!key_attack)
@@ -41,11 +24,6 @@ function scr_player_climbwall()
 			sprite_index = spr_player_mach4
 			state = 76
 		}
-	}
-	if ((place_meeting(x, (y + 1), obj_collisionparent) && (movespeed <= 0)) || (movespeed <= 0))
-	{
-	    state = 44;
-	    sprite_index = spr_player_fall;
 	}
 	image_speed = 0.6;
 	if (!instance_exists(obj_cloudeffect))

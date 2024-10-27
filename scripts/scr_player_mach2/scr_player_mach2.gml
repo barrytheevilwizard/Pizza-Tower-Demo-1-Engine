@@ -74,7 +74,7 @@ function scr_player_mach2() {
 	}
 	else
 	{
-		if sprite_index != spr_player_secondjump1
+		if sprite_index != spr_player_secondjump1 && sprite_index != spr_player_mach2jump
 		sprite_index = spr_player_secondjump2
 		if ((sprite_index == spr_player_secondjump1) && (floor(image_index) == (image_number - 1)))
 			 sprite_index = spr_player_secondjump2
@@ -156,7 +156,7 @@ function scr_player_mach2() {
 	}
 	if place_meeting(x, (y + 1), obj_collisionparent) && !place_meeting(x, y + 1, obj_slope)
 	{
-	    if place_meeting((x + 1), y, obj_collisionparent) && xscale == 1 && (!place_meeting((x * xscale), y, obj_slope))
+	    if place_meeting((x + xscale), y, obj_collisionparent) && !place_meeting((x + xscale), y, obj_slope) && !place_meeting(x + hsp,y,obj_destructibles)
 		{
 	        scr_sound(sound_enemyslap);
 	        movespeed = 0;
@@ -194,18 +194,29 @@ function scr_player_mach2() {
 	    state = 24;
 	    image_index = 0;
 	}
-	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall)))))
+	if (key_slap2 && ((shotgunAnim == 0) && (!((sprite_index == spr_player_facestomp) || (sprite_index == spr_player_freefall))))) && !key_up
 	{
 	    state = 19;
 	    image_index = 0;
-		if movespeed < 4
-		movespeed = 4
+		if movespeed < 13
+		movespeed = 13
 		if !place_meeting(x,y + 1,obj_collisionparent)
 		sprite_index = spr_player_suplexgrabjumpstart
 		else
 		sprite_index = spr_player_suplexdash
 		scr_sound(sfx_suplexdash)
 	}
+	else if (key_slap2 && shotgunAnim == 0) && key_up
+	{
+	    state = 80;
+	    image_index = 0;
+		sprite_index = spr_player_slapup
+		flash = 1
+		vsp = -14
+		scr_sound(sfx_suplexdash)
+	}
+	with instance_place(x + hsp,y,obj_destructibles)
+	instance_destroy()
 	image_speed = 0.65;
 	scr_collideandmove();
 }

@@ -1,7 +1,8 @@
 function scr_player_Sjump(){
 	scr_getinput();
-	hsp = 0;
 	mach2 = 0;
+	if sprite_index == spr_player_superjump || sprite_index == spr_player_backbreaker
+	hsp = 0
 	jumpAnim = 1;
 	dashAnim = 1;
 	landAnim = 0;
@@ -10,6 +11,7 @@ function scr_player_Sjump(){
 	crouchslideAnim = 1;
 	crouchAnim = 0;
 	machhitAnim = 0;
+	momemtum = 1
 	move = (key_left + key_right)
 	if (sprite_index == spr_player_superjump)
 	    vsp -= 0.65;
@@ -20,7 +22,7 @@ function scr_player_Sjump(){
 	    hsp = (xscale * a);
 	    vsp = 0;
 	}
-	if (place_meeting(x, (y - 1), obj_collisionparent) && ((!place_meeting(x, (y - 1), obj_destructibles)) && ((!place_meeting((x + sign(hsp)), y, obj_slope)) && (!place_meeting((x - sign(hsp)), y, obj_slope)))))
+	if place_meeting(x, (y - 1), obj_solid)
 	{
 	    scr_sound(sound_enemystomp);
 	    a = 0;
@@ -59,6 +61,15 @@ function scr_player_Sjump(){
 		xscale = move
 		vsp = 0
 	}
+	if sprite_index == spr_player_backbreaker
+		vsp = 0
+	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_backbreaker))
+	{
+		sprite_index = spr_player_superjump
+		vsp = -12
+		scr_sound(sound_superjump);
+		instance_create(x, y, obj_explosioneffect);
+	}
 	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_Sjumpcancelstart))
 	{
 		state = 76
@@ -69,5 +80,5 @@ function scr_player_Sjump(){
 		flash = 1
 	}
 	image_speed = 0.5;
-	scr_collideandmovesuperjump();
+	scr_collideandmove();
 }

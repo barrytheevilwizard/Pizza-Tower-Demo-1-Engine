@@ -2,16 +2,19 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_player_freefallstart()
 {
-	momemtum = 1
-	hsp = (move * movespeed);
 	sprite_index = spr_player_freefallprep
+	hsp = (xscale * movespeed);
+	momemtum = 1;
 	move = (key_right + key_left);
-	if move == -1 * xscale 
-	movespeed = 0
-	movespeed = Approach(movespeed,6,0.25)
+	if move == 1 * xscale 
+	movespeed = Approach(movespeed,6,2)
+	else if move == -1 * xscale 
+	movespeed = Approach(movespeed,-6,2)
+	if move == 0
+	movespeed = Approach(movespeed,0,2)
 	if vsp > 0
 	vsp += 0.5
-	if grounded && !place_meeting(x,y + vsp,obj_metalblock)
+	if place_meeting(x,y + 1,obj_solid) && !place_meeting(x,y + vsp,obj_metalblock)
 	{
 	    image_index = 0;
 	    state = 63;
@@ -36,6 +39,21 @@ function scr_player_freefallstart()
 	        instance_create(x, y, obj_landcloud);
 	    freefallstart = 0;
 	}
+	with instance_place(x,y + 1,obj_slope)
+	{
+		other.xscale = -sign(image_xscale)
+		other.state = 56
+		other.flash = 1
+		other.movespeed = 10
+	}
+	if (key_slap2 || key_attack2)
+	{
+	    sprite_index = spr_player_Sjumpcancelstart;
+	    state = 49;
+		image_index = 0
+		hsp = 0
+	}
+		
 	with instance_place(x,y + vsp,obj_metalblock)
 	instance_destroy()
 	with instance_place(x,y + vsp,obj_destructibles)
