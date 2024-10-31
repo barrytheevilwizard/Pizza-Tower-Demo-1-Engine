@@ -2,7 +2,10 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_player_freefallstart()
 {
-	sprite_index = spr_player_freefallprep
+	if sprite_index != spr_player_bodyslamstart && sprite_index != spr_player_bodyslamfall
+	sprite_index = spr_player_bodyslamstart
+	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_bodyslamstart))
+	sprite_index = spr_player_bodyslamfall
 	hsp = (xscale * movespeed);
 	momemtum = 1;
 	move = (key_right + key_left);
@@ -44,14 +47,7 @@ function scr_player_freefallstart()
 		other.xscale = -sign(image_xscale)
 		other.state = 56
 		other.flash = 1
-		other.movespeed = 10
-	}
-	if (key_slap2 || key_attack2)
-	{
-	    sprite_index = spr_player_Sjumpcancelstart;
-	    state = 49;
-		image_index = 0
-		hsp = 0
+		other.movespeed = 8
 	}
 		
 	with instance_place(x,y + vsp,obj_metalblock)

@@ -42,6 +42,7 @@ with(obj_player)
     flash = 0;
     player_x = obj_player.x;
     player_y = obj_player.y;
+	blur_effect = 0;
     global.key_inv = 0;
     global.shroomfollow = 0;
     global.cheesefollow = 0;

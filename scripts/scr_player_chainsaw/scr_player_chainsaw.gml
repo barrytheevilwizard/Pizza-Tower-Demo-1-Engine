@@ -34,7 +34,7 @@ function scr_player_chainsaw()
 	if key_jump && place_meeting(x,y + 1,obj_collisionparent)
 	{
 		vsp = -11
-		sprite_index = spr_player_secondjump1
+		sprite_index = spr_player_longjump
 		image_index = 0
 		state = 56
 		movespeed = 8
@@ -57,6 +57,7 @@ function scr_player_chainsaw()
 	        image_index = 0;
 	        instance_create((x + 10 * xscale), (y + 10), obj_bangeffect);
 			flash = 1
+			sprite_index = spr_player_slap1
 		}
 		instance_create((x + (obj_player.xscale * 30)), y, obj_bumpeffect);
 	    alarm[1] = 5;
@@ -74,10 +75,15 @@ function scr_player_chainsaw()
 	    sprite_index = spr_player_crouchslip;
 	    machhitAnim = 0;
 	    state = 54;
-		if movespeed < 12
-		movespeed = 12
-		else
-		movespeed += 6
+		movespeed = 16
+	}
+	if key_slap2
+	{
+		state = 81
+		movespeed = 10
+		vsp = -6
+		image_index = 0
+		sprite_index = spr_player_faceplant
 	}
 	with instance_place(x + hsp,y,obj_destructibles)
 	instance_destroy()

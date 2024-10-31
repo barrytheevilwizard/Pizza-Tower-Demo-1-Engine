@@ -74,10 +74,12 @@ function scr_player_mach2() {
 	}
 	else
 	{
-		if sprite_index != spr_player_secondjump1 && sprite_index != spr_player_mach2jump
+		if sprite_index != spr_player_secondjump1 && sprite_index != spr_player_mach2jump && sprite_index != spr_player_longjump && sprite_index != spr_player_longjumpend
 		sprite_index = spr_player_secondjump2
 		if ((sprite_index == spr_player_secondjump1) && (floor(image_index) == (image_number - 1)))
 			 sprite_index = spr_player_secondjump2
+		if ((sprite_index == spr_player_longjump) && (floor(image_index) == (image_number - 1)))
+			 sprite_index = spr_player_longjumpend
 	}
 	
 	if (!place_meeting(x, (y + 1), obj_collisionparent))

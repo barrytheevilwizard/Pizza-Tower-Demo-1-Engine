@@ -2,11 +2,11 @@ function scr_player_crouchslide() {
 	scr_getinput();
 	hsp = (xscale * movespeed);
 	if (movespeed >= 0) && grounded
-	    movespeed -= 0.2;
+	    movespeed -= movespeed / 24;
 	mask_index = spr_crouchmask;
 	if  (!key_down) && (!place_meeting(x, (y - 3), obj_collisionparent)) && movespeed <= 10
 	{
-	    machhitAnim = 1;
+	    sprite_index = spr_player_machhit
 	    state = 56;
 	}
 	if ((((hsp == 0) || ((place_meeting((x + 1), y, obj_collisionparent) && (xscale == 1)) || (place_meeting((x - 1), y, obj_collisionparent) && (xscale == -1)))) && (!place_meeting((x + sign(hsp)), y, obj_slope))) || (movespeed <= 0))
@@ -14,7 +14,6 @@ function scr_player_crouchslide() {
 	    state = 52;
 	    movespeed = 0;
 	    mach2 = 0;
-	    crouchslideAnim = 1;
 	    image_index = 0;
 	    crouchAnim = 1;
 	    start_running = 1;
@@ -34,6 +33,13 @@ function scr_player_crouchslide() {
 		sprite_index = spr_player_bump;
 		
 	}
+	if key_slap2 && sprite_index != spr_player_Sjumpcancelland && sprite_index != spr_player_Sjumpcancelslide
+	{
+		sprite_index = spr_player_Sjumpcancelland
+		movespeed = 18
+	}
+	if (floor(image_index) == (image_number - 1)) && sprite_index == spr_player_Sjumpcancelland
+	    sprite_index = spr_player_Sjumpcancelslide;
 	if ((!instance_exists(obj_slidecloud)) && (place_meeting(x, (y + 1), obj_collisionparent) && (movespeed > 5)))
 	    instance_create(x, y, obj_slidecloud);
 	image_speed = 0.35;

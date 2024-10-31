@@ -50,12 +50,12 @@ function scr_player_Sjump(){
 	    state = 78;
 	    machhitAnim = 0;
 	}
-	if (key_slap2 || key_attack2) && sprite_index != spr_player_Sjumpcancelstart
+	if (key_slap2 || key_attack2) && sprite_index != spr_player_longjump && sprite_index != spr_player_backbreaker
 	{
-		sprite_index = spr_player_Sjumpcancelstart
+		sprite_index = spr_player_longjump
 		image_index = 0
 	}
-	if sprite_index == spr_player_Sjumpcancelstart
+	if sprite_index == spr_player_longjump
 	{
 		if move != 0
 		xscale = move
@@ -70,13 +70,13 @@ function scr_player_Sjump(){
 		scr_sound(sound_superjump);
 		instance_create(x, y, obj_explosioneffect);
 	}
-	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_Sjumpcancelstart))
+	if ((floor(image_index) == (image_number - 1)) && (sprite_index == spr_player_longjump))
 	{
-		state = 76
+		state = 56
 		image_index = 0
-	    sprite_index = spr_player_Sjumpcancel;
+	    sprite_index = spr_player_longjumpend;
 		movespeed = 12
-		vsp = -6
+		vsp = -9
 		flash = 1
 	}
 	image_speed = 0.5;
