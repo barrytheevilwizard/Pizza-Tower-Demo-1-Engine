@@ -70,9 +70,12 @@ function scr_player_chainsaw()
 	    vsp = -7;
 		scr_sound(sound_enemyslap)
 	}
-	if (key_down && place_meeting(x, (y + 1), obj_collisionparent))
+	if key_down
 	{
+		if grounded
 	    sprite_index = spr_player_crouchslip;
+		else 
+		sprite_index = spr_player_jumpdive1
 	    machhitAnim = 0;
 	    state = 54;
 		movespeed = 16
@@ -80,7 +83,7 @@ function scr_player_chainsaw()
 	if key_slap2
 	{
 		state = 81
-		movespeed = 10
+		movespeed = 4
 		vsp = -6
 		image_index = 0
 		sprite_index = spr_player_faceplant

@@ -17,7 +17,7 @@ function scr_player_freefallstart()
 	movespeed = Approach(movespeed,0,2)
 	if vsp > 0
 	vsp += 0.5
-	if place_meeting(x,y + 1,obj_solid) && !place_meeting(x,y + vsp,obj_metalblock)
+	if place_meeting(x,y + 1,obj_solid)
 	{
 	    image_index = 0;
 	    state = 63;
@@ -49,10 +49,9 @@ function scr_player_freefallstart()
 		other.flash = 1
 		other.movespeed = 8
 	}
-		
-	with instance_place(x,y + vsp,obj_metalblock)
-	instance_destroy()
-	with instance_place(x,y + vsp,obj_destructibles)
+	if vsp > 22.5 && !instance_exists(obj_freefallhitbox)
+	instance_create(x,y + 64 + obj_player.vsp,obj_freefallhitbox)
+	with instance_place(x,y + (vsp * 2),obj_destructibles)
 	instance_destroy()
 	image_speed = 0.35;
 	scr_collideandmove();

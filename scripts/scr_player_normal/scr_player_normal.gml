@@ -142,19 +142,20 @@ function scr_player_normal() {
 	    state = 44;
 	    image_index = 0;
 	}
-	if (key_attack && (place_meeting(x, (y + 1), obj_collisionparent)) && ((!(place_meeting((x + 1), y, obj_collisionparent) && ((xscale == 1) && (!place_meeting((x + xscale), y, obj_slope))))) && (!(place_meeting((x - 1), y, obj_collisionparent) && ((xscale == -1) && (!place_meeting((x + xscale), y, obj_slope)))))))
+	if ((key_attack && (place_meeting(x, (y + 1), obj_collisionparent)) && ((!(place_meeting((x + 1), y, obj_collisionparent) && ((xscale == 1) && (!place_meeting((x + xscale), y, obj_slope))))) && (!(place_meeting((x - 1), y, obj_collisionparent) && ((xscale == -1) && (!place_meeting((x + xscale), y, obj_slope)))))))) && global.character == "P"
 	{
 	    sprite_index = spr_player_mach1;
 	    jumpAnim = 1;
 	    state = 56;
 	    image_index = 0;
 	}
-	if (key_up && key_attack2)
+	else if ((key_attack && (place_meeting(x, (y + 1), obj_collisionparent)) && ((!(place_meeting((x + 1), y, obj_collisionparent) && ((xscale == 1) && (!place_meeting((x + xscale), y, obj_slope))))) && (!(place_meeting((x - 1), y, obj_collisionparent) && ((xscale == -1) && (!place_meeting((x + xscale), y, obj_slope)))))))) && global.character == "M"
 	{
-	    instance_create(x, y, obj_grabhitbox);
-	    state = 44;
-	    vsp = -6;
 	    sprite_index = spr_player_grabmove;
+	    jumpAnim = 1;
+	    state = 82;
+	    image_index = 0;
+		movespeed = 0
 	}
 	if (key_jump && (place_meeting(x, (y + 1), obj_collisionparent)) && (!key_down))
 	{

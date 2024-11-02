@@ -23,7 +23,7 @@ function scr_player_machroll()
 			}
 		}
 	}
-	if place_meeting((x + xscale), y, obj_collisionparent) && !place_meeting((x + xscale), y, obj_destructibles) && !place_meeting((x + xscale), y, obj_slope)
+	if place_meeting((x + xscale), y, obj_collisionparent) && !place_meeting((x + hsp), y, obj_destructibles) && !place_meeting((x + xscale), y, obj_slope)
 	{
 	    with (obj_camera)
 	    {
@@ -92,6 +92,12 @@ function scr_player_machroll()
 					other.movespeed -= 0.5
 			}
         }
+	}
+	if key_slap2
+	{
+		sprite_index = spr_player_crouchslip
+		movespeed = 16
+		state = 54
 	}
 	if movespeed < 6
 	movespeed += 0.25

@@ -43,6 +43,7 @@ with(obj_player)
     player_x = obj_player.x;
     player_y = obj_player.y;
 	blur_effect = 0;
+	mach3_effect = 0;
     global.key_inv = 0;
     global.shroomfollow = 0;
     global.cheesefollow = 0;
@@ -62,6 +63,7 @@ with(obj_player)
     bounce = 0;
     a = 0;
     idle = 0;
+	global.character = "P"
     attacking = 0;
     slamming = 0;
     superslam = 0;

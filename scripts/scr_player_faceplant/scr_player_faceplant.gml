@@ -4,7 +4,10 @@ function scr_player_faceplant()
 {
 	if sprite_index != spr_player_faceplant
 	sprite_index = spr_player_faceplant
-	movespeed = Approach(movespeed,12,0.1)
+	if movespeed < 12
+	movespeed++
+	if movespeed > 12
+	movespeed -= 0.5
 	hsp = (xscale * movespeed);
 	momemtum = 1;
 	move = (key_right + key_left);

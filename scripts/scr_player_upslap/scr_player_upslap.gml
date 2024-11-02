@@ -24,6 +24,10 @@ function scr_player_upslap()
 	    state = 0
 		sprite_index = spr_player_land 
 		image_index = 0
+		if movespeed < 0
+		movespeed *= -1
+		if move != 0
+		xscale = move
 	}
 	with instance_place(x,y,obj_baddie) 
 	{

@@ -235,6 +235,12 @@ with (obj_player) {
 		case 81:
 			scr_player_faceplant();
 			break;
+		case 82:
+			scr_playerM_shoulderbash();
+			break;
+		case 83:
+			scr_playerM_shoulderbounce()
+			break;
     }
 	if place_meeting(x, (y + 1), obj_collisionparent) && state != 63 && slammed == 1 {
 		slammed = 0;
@@ -353,28 +359,36 @@ with (obj_player) {
         ladderbuffer = 0;
     if (state != 44)
         stompAnim = 0;
-    if (((state == 76) || ((state == 56) || ((state == 57) && (mach2 >= 100))))) && (!instance_exists(obj_mach3effect))
-    {
-        toomuchalarm1 = 6;
-        instance_create(x, y, obj_mach3effect);
-    }
-    if (toomuchalarm1 > 0)
-    {
-        toomuchalarm1 -= 1;
-        if ((toomuchalarm1 <= 0) && ((state == 76) || ((state == 56) || ((state == 57) && (mach2 >= 100)))))
-        {
-            instance_create(x, y, obj_mach3effect);
-            toomuchalarm1 = 6;
-        }
-    }
-	if state == 79 || state == 19 || state == 80 || state == 49 || state == 23 || state == 3
+	if (state == 79 && vsp < 25) || state == 19 || state == 80 || state == 49 || state == 23 || state == 3
 	{
 		if blur_effect > 0
 		blur_effect--;
 		else
 		{
 			blur_effect = 2;
-			instance_create(x, y, obj_blureffect);
+			instance_create(x, y, obj_blureffect)
+		}
+	}
+	else if (state == 79 && vsp > 22.5)
+	{
+		if blur_effect > 0
+		blur_effect--;
+		else
+		{
+			flash = 1
+			blur_effect = 2;
+			instance_create(x, y, obj_mach3effect);
+		}
+	}
+	
+	if ((state == 76) || (state == 56) || (state == 81) || (state == 57) && !instance_exists(obj_mach3effect))
+	{
+		if mach3_effect > 0
+		mach3_effect--;
+		else
+		{
+			mach3_effect = 6;
+			instance_create(x, y, obj_mach3effect)
 		}
 	}
     if ((state != 60) && (state != 29))
